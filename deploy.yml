@@ -1,0 +1,19 @@
+---
+- name: Deploy
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Deps
+      apt:
+        name: [docker.io, docker-compose-v2, curl]
+        state: present
+    - name: Up
+      community.docker.docker_compose_v2:
+        project_src: /home/alumno/spotesify
+        state: present
+        build: always
+    - name: Check
+      uri:
+        url: http://localhost:5000/health
+        status_code: 200
+
