@@ -37,6 +37,7 @@ services:
   api:
     build: ./api
     container_name: spotesify-api
+    command: node server.js
     depends_on:
       - db
     environment:
